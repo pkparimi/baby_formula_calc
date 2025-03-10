@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanu's Baby Formula Maker</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #E3F2FD;
+            color: #1565C0;
+        }
+        h1 {
+            color: #0D47A1;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #90CAF9;
+            border-radius: 5px;
+            width: 80%;
+            background-color: #FFFFFF;
+            color: #0D47A1;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #42A5F5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #1E88E5;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 15px;
+            background: #BBDEFB;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hanu Baby's Formula Calculator</h1>
+	<h3>So Umma Doesn't Have to Math<h3>
+    <label>Number of Bottles to Make:</label>
+    <input type="number" id="bottles" min="1">
+    
+    <label>Ounces per Bottle:</label>
+    <input type="number" id="ounces" min="1">
+    
+    <label>mL of Breast Milk to Mix In:</label>
+    <input type="number" id="breastMilk" min="0">
+    
+    <button onclick="calculateFormula()">Calculate</button>
+    
+    <div id="output"></div>
+    
+    <script>
+        function calculateFormula() {
+            let bottles = parseFloat(document.getElementById('bottles').value);
+            let ounces = parseFloat(document.getElementById('ounces').value);
+            let breastMilk = parseFloat(document.getElementById('breastMilk').value);
+            
+            if (isNaN(bottles) || isNaN(ounces) || isNaN(breastMilk)) {
+                document.getElementById('output').innerHTML = "Please enter valid numbers for all fields.";
+                return;
+            }
+            
+            let water = (33.333333333 * bottles * ounces) - breastMilk;
+            let formulaPowder = (water / 33.333333333) * 4.3;
+            let locustBeanGum = 33.333333333 * bottles * ounces * 0.002;
+            
+            document.getElementById('output').innerHTML = `
+                <p><strong>Water to Mix In:</strong> ${water.toFixed(2)} mL</p>
+                <p><strong>Formula Powder:</strong> ${formulaPowder.toFixed(2)} grams</p>
+                <p><strong>Locust Bean Gum:</strong> ${locustBeanGum.toFixed(2)} grams</p>
+            `;
+        }
+    </script>
+</body>
+</html>
