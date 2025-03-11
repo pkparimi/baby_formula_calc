@@ -78,10 +78,12 @@
                 document.getElementById('output').innerHTML = "Please enter valid numbers for all fields.";
                 return;
             }
-            
-            let water = (33.333333333 * bottles * ounces) - breastMilk;
-            let formulaPowder = (water / 33.333333333) * 4.3;
-            let locustBeanGum = 33.333333333 * bottles * ounces * 0.002;
+
+	    let totalLiquid = bottles * ounces * 33.333333333;
+            let formula = totalLiquid - breastMilk;
+            let formulaPowder = (formula / 33.333333333) * 4.3;
+	    let water = formula - ((10/12.9) * formulaPowder)
+            let locustBeanGum = totalLiquid * 0.003;
             
             document.getElementById('output').innerHTML = `
                 <p><strong>Water to Mix In:</strong> ${water.toFixed(2)} mL</p>
